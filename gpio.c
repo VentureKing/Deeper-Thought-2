@@ -11,7 +11,7 @@
 
 
 // TO DO: define SERIALSETUP to use PiDPs wired for serial port
-//#define SERIALSETUP
+// #define SERIALSETUP
 
 
 #include <time.h>
@@ -131,13 +131,13 @@ void *blink(int *terminate)
 	GPIO_PULLCLK0 = 0x0fff0; // selects GPIO pins 4..15 (assumes we avoid pins 2 and 3!)
 #endif
 	short_wait();
-	GPIO_PULL = 0; // reset GPPUD register
+	GPIO_PULL = 1; // reset GPPUD register
 	short_wait();
 	GPIO_PULLCLK0 = 0; // remove clock
 	short_wait(); // probably unnecessary
 
 	// BCM2835 ARM Peripherals PDF p 101 & elinux.org/RPi_Low-level_peripherals#Internal_Pull-Ups_.26_Pull-Downs
-	GPIO_PULL = 0;	// no pull-up no pull-down just float
+	GPIO_PULL = 1;	// no pull-up no pull-down just float
 	short_wait();	// must wait 150 cycles
 	GPIO_PULLCLK0 = 0x0ff00000; // selects GPIO pins 20..27
 	short_wait();
